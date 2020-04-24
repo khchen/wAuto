@@ -431,7 +431,7 @@ proc click*(window: Window, button = mbLeft, pos = wDefaultPoint, clicks = 1) =
 proc click*(window: Window, item: MenuItem) =
   ## Invokes a menu item of a window.
   if item.byPos:
-    PostMessage(HWND window, WM_MENUCOMMAND, WPARAM item.index, item.handle)
+    PostMessage(HWND window, WM_MENUCOMMAND, WPARAM item.index, LPARAM item.handle)
   else:
     PostMessage(HWND window, WM_COMMAND, WPARAM item.id, 0)
   sleep(opt("windelay"))
