@@ -198,7 +198,9 @@ proc regWrite*(key: string, name: string, value: RegData): bool {.discardable.} 
       buffer = string T(value.data)
 
     of rkRegMultiSz:
-      buffer = (string T(value.data)).strip(leading=false, trailing=true, chars={'\0'})
+      for line in value.data.split('\0'):
+        buffer.add string T(line)
+      buffer.add '\0'.repeat(sizeof(TChar))
 
     else:
       buffer = value.data

@@ -126,6 +126,8 @@ function main() {
     title="getPath(process: Process): string"><wbr />get<wbr />Path<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#getName%2CProcess"
     title="getName(process: Process): string"><wbr />get<wbr />Name<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#isWow64%2CProcess"
+    title="isWow64(process: Process): bool"><wbr />is<wbr />Wow64<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -253,6 +255,13 @@ Gets the path of a process.
 <dd>
 
 Gets the name of a process.
+
+</dd>
+<a id="isWow64,Process"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#isWow64%2CProcess"><span class="Identifier">isWow64</span></a><span class="Other">(</span><span class="Identifier">process</span><span class="Other">:</span> <a href="common.html#Process"><span class="Identifier">Process</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Determines whether the specified process is running under WOW64 or an Intel64 of x64 processor.
 
 </dd>
 

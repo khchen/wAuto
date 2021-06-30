@@ -192,6 +192,10 @@ function main() {
     title="maximize(window: Window)"><wbr />maximize<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#restore%2CWindow"
     title="restore(window: Window)"><wbr />restore<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#minimizeAll"
+    title="minimizeAll()"><wbr />minimize<wbr />All<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#minimizeAllUndo"
+    title="minimizeAllUndo()"><wbr />minimize<wbr />All<wbr />Undo<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#focus%2CWindow"
     title="focus(window: Window)"><wbr />focus<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#click%2CWindow%2Cint"
@@ -594,6 +598,20 @@ Maximize the window.
 <dd>
 
 Undoes a window minimization or maximization
+
+</dd>
+<a id="minimizeAll"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#minimizeAll"><span class="Identifier">minimizeAll</span></a><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Minimizes all windows. Equal to send(&quot;#m&quot;).
+
+</dd>
+<a id="minimizeAllUndo"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#minimizeAllUndo"><span class="Identifier">minimizeAllUndo</span></a><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Undoes a previous minimizeAll(). Equal to send(&quot;#+m&quot;).
 
 </dd>
 <a id="focus,Window"></a>

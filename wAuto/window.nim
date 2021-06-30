@@ -405,6 +405,16 @@ proc restore*(window: Window) {.inline.} =
   ## Undoes a window minimization or maximization
   ShowWindow(HWND window, SW_RESTORE)
 
+proc minimizeAll*() {.inline.} =
+  ## Minimizes all windows. Equal to send("#m").
+  PostMessage(FindWindow(("Shell_TrayWnd"), NULL), WM_COMMAND, 419, 0)
+  sleep(opt("windelay"))
+
+proc minimizeAllUndo*() {.inline.} =
+  ## Undoes a previous minimizeAll(). Equal to send("#+m").
+  PostMessage(FindWindow(("Shell_TrayWnd"), NULL), WM_COMMAND, 416, 0)
+  sleep(opt("windelay"))
+
 proc focus*(window: Window) =
   ## Focus a window.
   let (tid, pid) = (GetCurrentThreadId(), GetWindowThreadProcessId(HWND window, nil))

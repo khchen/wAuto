@@ -174,6 +174,15 @@ proc getName*(process: Process): string {.property.} =
       if process == tup.process:
         return tup.name
 
+proc isWow64*(process: Process): bool =
+  ## Determines whether the specified process is running under WOW64 or an Intel64 of x64 processor.
+  let handle = OpenProcess(PROCESS_QUERY_INFORMATION or PROCESS_VM_READ, 0, DWORD process)
+  if handle != 0:
+    defer: CloseHandle(handle)
+    var wow64: BOOL
+    if IsWow64Process(handle, addr wow64) != 0:
+      result = bool wow64
+
 iterator windows*(process: Process): Window =
   ## Iterates over all top-level windows that created by the specified process.
   for window in windows():
