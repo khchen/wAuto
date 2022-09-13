@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                   (c) Copyright 2020 Ward
+#                 (c) Copyright 2020-2022 Ward
 #
 #====================================================================
 
@@ -233,7 +233,7 @@ proc setSize*(window: Window, width: int, height: int) {.property, inline.} =
   setSize(window, (width, height))
 
 proc getSize*(window: Window): wSize {.property.} =
-  ## Retrieves the position of a given window.
+  ## Retrieves the size of a given window.
   var rect: RECT
   if GetWindowRect(HWND window, &rect):
     result = (int(rect.right - rect.left), int(rect.bottom - rect.top))
@@ -292,7 +292,7 @@ proc getChildren*(window: Window): seq[Window] {.property.} =
     pResult[].add(Window hwnd)
 
 proc getActiveWindow*(): Window {.property, inline.} =
-  ## Get the currently active window
+  ## Get the currently active window.
   result = Window GetForegroundWindow()
 
 proc setTransparent*(window: Window, alpha: range[0..255]) {.property.} =
@@ -709,7 +709,7 @@ template waitAny*(condition: untyped, timeout: untyped = 0): untyped =
     discardable window
 
 template waitAll*(condition: untyped, timeout: untyped = 0): untyped =
-  ## Repeatly examines all the top-level windows until condition becomes true for all window.
+  ## Repeatly examines all the top-level windows until condition becomes true for all windows.
   ## A *window* symbol is injected into the condition.
   ## *timeout* specifies how long to wait (in seconds). Default (0) is to wait indefinitely.
 

@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                   (c) Copyright 2020 Ward
+#                 (c) Copyright 2020-2022 Ward
 #
 #====================================================================
 
@@ -345,14 +345,14 @@ proc send*(text: string, raw = false, window = InvalidWindow, attach = false,
   ## ================================  =============================================================
   ## Syntax                            Description
   ## ================================  =============================================================
-  ## +                                 Combine next key with SHIFT.
-  ## !                                 Combine next key with ALT.
-  ## ^                                 Combine next key with CTRL.
-  ## #                                 Combine next key with Windows key.
-  ## {!}                               !
-  ## {#}                               #
-  ## {+}                               +
-  ## {^}                               ^
+  ## \+                                Combine next key with SHIFT.
+  ## \!                                Combine next key with ALT.
+  ## \^                                Combine next key with CTRL.
+  ## \#                                Combine next key with Windows key.
+  ## {\!}                              \!
+  ## {\#}                              \#
+  ## {\+}                              \+
+  ## {\^}                              \^
   ## {{}                               {
   ## {}}                               }
   ## {SPACE}                           SPACE

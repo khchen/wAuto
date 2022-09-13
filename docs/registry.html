@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>registry</title>
+<title>wAuto/registry</title>
 <link rel="stylesheet" type="text/css" href="nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
@@ -34,7 +34,6 @@ function main() {
     }
   }
 
-  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   function switchTheme(e) {
       if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
@@ -45,33 +44,32 @@ function main() {
       }
   }
 
-  toggleSwitch.addEventListener('change', switchTheme, false);
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  if (toggleSwitch !== null) {
+    toggleSwitch.addEventListener('change', switchTheme, false);
+  }
 
+  var currentTheme = localStorage.getItem('theme');
+  if (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    currentTheme = 'dark';
+  }
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark' && toggleSwitch !== null) {
+      toggleSwitch.checked = true;
     }
   }
 }
+
+window.addEventListener('DOMContentLoaded', main);
 </script>
 
 </head>
-<body onload="main()">
+<body>
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">registry</h1>
+    <h1 class="title">wAuto/registry</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -91,6 +89,7 @@ function main() {
       <li><a href="keyboard.html">keyboard</a></li>
       <li><a href="process.html">process</a></li>
       <li><a href="registry.html">registry</a></li>
+      <li><a href="misc.html">misc</a></li>
     </ul>
   </div>
   <ul class="simple simple-toc" id="toc-list">
@@ -98,32 +97,50 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">==
       <li><a class="reference" href="#%3D%3D%2CRegData%2CRegData"
-    title="`==`(a, b: RegData): bool"><wbr />`==`<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regRead%2Cstring%2Cstring"
-    title="regRead(key: string; value: string): RegData"><wbr />reg<wbr />Read<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regWrite%2Cstring"
-    title="regWrite(key: string): bool"><wbr />reg<wbr />Write<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regWrite%2Cstring%2Cstring%2CRegData"
-    title="regWrite(key: string; name: string; value: RegData): bool"><wbr />reg<wbr />Write<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regWrite%2Cstring%2Cstring%2Cstring"
-    title="regWrite(key: string; name: string; value: string): bool"><wbr />reg<wbr />Write<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regWrite%2Cstring%2Cstring%2CDWORD"
-    title="regWrite(key: string; name: string; value: DWORD): bool"><wbr />reg<wbr />Write<span class="attachedType"></span></a></li>
+    title="`==`(a, b: RegData): bool">`==`(a, b: RegData): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">regDelete
+      <li><a class="reference" href="#regDelete%2Cstring"
+    title="regDelete(key: string): bool">regDelete(key: string): bool</a></li>
   <li><a class="reference" href="#regDelete%2Cstring%2Cstring"
-    title="regDelete(key: string; name: string): bool"><wbr />reg<wbr />Delete<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regDelete%2Cstring"
-    title="regDelete(key: string): bool"><wbr />reg<wbr />Delete<span class="attachedType"></span></a></li>
+    title="regDelete(key: string; name: string): bool">regDelete(key: string; name: string): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">regRead
+      <li><a class="reference" href="#regRead%2Cstring%2Cstring"
+    title="regRead(key: string; value: string): RegData">regRead(key: string; value: string): RegData</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">regWrite
+      <li><a class="reference" href="#regWrite%2Cstring"
+    title="regWrite(key: string): bool">regWrite(key: string): bool</a></li>
+  <li><a class="reference" href="#regWrite%2Cstring%2Cstring%2CDWORD"
+    title="regWrite(key: string; name: string; value: DWORD): bool">regWrite(key: string; name: string; value: DWORD): bool</a></li>
+  <li><a class="reference" href="#regWrite%2Cstring%2Cstring%2CRegData"
+    title="regWrite(key: string; name: string; value: RegData): bool">regWrite(key: string; name: string; value: RegData): bool</a></li>
+  <li><a class="reference" href="#regWrite%2Cstring%2Cstring%2Cstring"
+    title="regWrite(key: string; name: string; value: string): bool">regWrite(key: string; name: string; value: string): bool</a></li>
+
+  </ul>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">regKeys
       <li><a class="reference" href="#regKeys.i%2Cstring"
-    title="regKeys(key: string): string"><wbr />reg<wbr />Keys<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#regValues.i%2Cstring"
-    title="regValues(key: string): tuple[name: string, kind: RegKind]"><wbr />reg<wbr />Values<span class="attachedType"></span></a></li>
+    title="regKeys(key: string): string">regKeys(key: string): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">regValues
+      <li><a class="reference" href="#regValues.i%2Cstring"
+    title="regValues(key: string): tuple[name: string, kind: RegKind]">regValues(key: string): tuple[name: string, kind: RegKind]</a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -132,6 +149,7 @@ function main() {
 </ul>
 
   </div>
+  
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
@@ -146,115 +164,117 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="==,RegData,RegData"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%3D%3D%2CRegData%2CRegData"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <a href="common.html#RegData"><span class="Identifier">RegData</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<div id="==,RegData,RegData">
+<dt><pre><span class="Keyword">proc</span> <a href="#%3D%3D%2CRegData%2CRegData"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">a</span><span class="Other">,</span> <span class="Identifier">b</span><span class="Other">:</span> <a href="common.html#RegData"><span class="Identifier">RegData</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Checks for equality between two RegData variables.
 
 </dd>
-<a id="regRead,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regRead%2Cstring%2Cstring"><span class="Identifier">regRead</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#RegData"><span class="Identifier">RegData</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Reads a value from the registry.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">echo</span> <span class="Identifier">regRead</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion&quot;</span><span class="Other">,</span>
-              <span class="StringLit">&quot;ProgramFilesDir&quot;</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="regWrite,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Creates a key in the registry.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">regWrite</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="regWrite,string,string,RegData"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring%2Cstring%2CRegData"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="common.html#RegData"><span class="Identifier">RegData</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Creates a value in the registry.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">regWrite</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Other">,</span> <span class="StringLit">&quot;Key1&quot;</span><span class="Other">,</span>
-           <span class="Identifier">RegData</span><span class="Other">(</span><span class="Identifier">kind</span><span class="Other">:</span> <span class="Identifier">rkRegSz</span><span class="Other">,</span> <span class="Identifier">data</span><span class="Other">:</span> <span class="StringLit">&quot;Test&quot;</span><span class="Other">)</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="regWrite,string,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring%2Cstring%2Cstring"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Creates a value of REG_SZ type in the registry.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">regWrite</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Other">,</span> <span class="StringLit">&quot;Key2&quot;</span><span class="Other">,</span> <span class="StringLit">&quot;Test&quot;</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="regWrite,string,string,DWORD"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring%2Cstring%2CDWORD"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">DWORD</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Creates a value of REG_DWORD type in the registry.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">regWrite</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Other">,</span> <span class="StringLit">&quot;Key3&quot;</span><span class="Other">,</span> <span class="DecNumber">12345</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="regDelete,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regDelete%2Cstring%2Cstring"><span class="Identifier">regDelete</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Deletes a value from the registry.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">regDelete</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Other">,</span> <span class="StringLit">&quot;Key3&quot;</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="regDelete,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#regDelete%2Cstring"><span class="Identifier">regDelete</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="regDelete,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#regDelete%2Cstring"><span class="Identifier">regDelete</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Deletes the entire key from the registry. <strong>Deleting from the registry is potentially dangerous--please exercise caution!</strong>
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">regDelete</span><span class="Other">(</span><span class="StringLit">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Other">)</span>
-</pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">regDelete</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Punctuation">)</span></pre>
 
 </dd>
+</div>
+<div id="regDelete,string,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#regDelete%2Cstring%2Cstring"><span class="Identifier">regDelete</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Deletes a value from the registry.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">regDelete</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Key3&quot;</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="regRead,string,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#regRead%2Cstring%2Cstring"><span class="Identifier">regRead</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#RegData"><span class="Identifier">RegData</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Reads a value from the registry.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">echo</span> <span class="Identifier">regRead</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;ProgramFilesDir&quot;</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="regWrite,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Creates a key in the registry.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">regWrite</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="regWrite,string,string,DWORD">
+<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring%2Cstring%2CDWORD"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">DWORD</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Creates a value of REG_DWORD type in the registry.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">regWrite</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Key3&quot;</span><span class="Punctuation">,</span> <span class="DecNumber">12345</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="regWrite,string,string,RegData">
+<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring%2Cstring%2CRegData"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="common.html#RegData"><span class="Identifier">RegData</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Creates a value in the registry.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">regWrite</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Key1&quot;</span><span class="Punctuation">,</span> <span class="Identifier">RegData</span><span class="Punctuation">(</span><span class="Identifier">kind</span><span class="Punctuation">:</span> <span class="Identifier">rkRegSz</span><span class="Punctuation">,</span> <span class="Identifier">data</span><span class="Punctuation">:</span> <span class="StringLit">&quot;Test&quot;</span><span class="Punctuation">)</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="regWrite,string,string,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#regWrite%2Cstring%2Cstring%2Cstring"><span class="Identifier">regWrite</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">discardable</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Creates a value of REG_SZ type in the registry.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">regWrite</span><span class="Punctuation">(</span><span class="RawData">r&quot;HKEY_CURRENT_USER\Software\wAuto&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Key2&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Test&quot;</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
 
 </dl></div>
 <div class="section" id="15">
 <h1><a class="toc-backref" href="#15">Iterators</a></h1>
 <dl class="item">
-<a id="regKeys.i,string"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#regKeys.i%2Cstring"><span class="Identifier">regKeys</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IndexDefect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<div id="regKeys.i,string">
+<dt><pre><span class="Keyword">iterator</span> <a href="#regKeys.i%2Cstring"><span class="Identifier">regKeys</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Iterates over subkeys.
 
 </dd>
-<a id="regValues.i,string"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#regValues.i%2Cstring"><span class="Identifier">regValues</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">kind</span><span class="Other">:</span> <a href="common.html#RegKind"><span class="Identifier">RegKind</span></a><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IndexDefect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="regValues.i,string">
+<dt><pre><span class="Keyword">iterator</span> <a href="#regValues.i%2Cstring"><span class="Identifier">regValues</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">kind</span><span class="Other">:</span> <a href="common.html#RegKind"><span class="Identifier">RegKind</span></a><span class="Other">]</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Iterates over name and kind of values.
 
 </dd>
+</div>
 
 </dl></div>
 
@@ -266,7 +286,7 @@ Iterates over name and kind of values.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim.</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-09-13 03:57:17 UTC</small>
       </div>
     </div>
   </div>

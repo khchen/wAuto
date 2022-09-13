@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                   (c) Copyright 2020 Ward
+#                 (c) Copyright 2020-2022 Ward
 #
 #====================================================================
 
@@ -26,6 +26,7 @@
 ##  - `keyboard <keyboard.html>`_
 ##  - `process <process.html>`_
 ##  - `registry <registry.html>`_
+##  - `misc <misc.html>`_
 ##
 ## Modules can be imoprted all in one, or be imported one by one.
 ## For example:
@@ -36,5 +37,5 @@
 
 {.deadCodeElim: on.}
 
-import wAuto/[common, window, mouse, keyboard, process, registry]
-export common, window, mouse, keyboard, process, registry
+import wAuto/[common, window, mouse, keyboard, process, registry, misc]
+export common, window, mouse, keyboard, process, registry, misc

@@ -55,4 +55,4 @@ kill(notepad.process)
 ## License
 Read license.txt for more details.
 
-Copyright (c) 2020 Kai-Hung Chen, Ward. All rights reserved.
+Copyright (c) 2020-2022 Kai-Hung Chen, Ward. All rights reserved.

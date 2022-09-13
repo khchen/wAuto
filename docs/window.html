@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>window</title>
+<title>wAuto/window</title>
 <link rel="stylesheet" type="text/css" href="nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
@@ -34,7 +34,6 @@ function main() {
     }
   }
 
-  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   function switchTheme(e) {
       if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
@@ -45,33 +44,32 @@ function main() {
       }
   }
 
-  toggleSwitch.addEventListener('change', switchTheme, false);
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+  if (toggleSwitch !== null) {
+    toggleSwitch.addEventListener('change', switchTheme, false);
+  }
 
+  var currentTheme = localStorage.getItem('theme');
+  if (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    currentTheme = 'dark';
+  }
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark' && toggleSwitch !== null) {
+      toggleSwitch.checked = true;
     }
   }
 }
+
+window.addEventListener('DOMContentLoaded', main);
 </script>
 
 </head>
-<body onload="main()">
+<body>
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">window</h1>
+    <h1 class="title">wAuto/window</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -91,6 +89,7 @@ function main() {
       <li><a href="keyboard.html">keyboard</a></li>
       <li><a href="process.html">process</a></li>
       <li><a href="registry.html">registry</a></li>
+      <li><a href="misc.html">misc</a></li>
     </ul>
   </div>
   <ul class="simple simple-toc" id="toc-list">
@@ -98,146 +97,308 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">$
       <li><a class="reference" href="#%24%2CWindow"
-    title="`$`(x: Window): string"><wbr />`$`<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#%3D%3D%2CWindow%2CWindow"
-    title="`==`(x, y: Window): bool"><wbr />`==`<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#repr%2CWindow"
-    title="repr(x: Window): string"><wbr />repr<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getHandle%2CWindow"
-    title="getHandle(window: Window): HWND"><wbr />get<wbr />Handle<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getTitle%2CWindow"
-    title="getTitle(window: Window): string"><wbr />get<wbr />Title<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setTitle%2CWindow%2Cstring"
-    title="setTitle(window: Window; title: string)"><wbr />set<wbr />Title<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getClassName%2CWindow"
-    title="getClassName(window: Window): string"><wbr />get<wbr />Class<wbr />Name<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getText%2CWindow"
-    title="getText(window: Window; detectHidden = false): string"><wbr />get<wbr />Text<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getStatusBarText%2CWindow%2Cint"
-    title="getStatusBarText(window: Window; index = 0): string"><wbr />get<wbr />Status<wbr />Bar<wbr />Text<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getPosition%2CWindow%2CwPoint"
-    title="getPosition(window: Window; pos: wPoint = (0, 0)): wPoint"><wbr />get<wbr />Position<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getPosition%2CWindow%2Cint%2Cint"
-    title="getPosition(window: Window; x: int; y: int): wPoint"><wbr />get<wbr />Position<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setPosition%2CWindow%2CwPoint"
-    title="setPosition(window: Window; pos: wPoint)"><wbr />set<wbr />Position<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setPosition%2CWindow%2Cint%2Cint"
-    title="setPosition(window: Window; x: int; y: int)"><wbr />set<wbr />Position<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getClientPosition%2CWindow%2CwPoint"
-    title="getClientPosition(window: Window; pos: wPoint = (0, 0)): wPoint"><wbr />get<wbr />Client<wbr />Position<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getClientPosition%2CWindow%2Cint%2Cint"
-    title="getClientPosition(window: Window; x: int; y: int): wPoint"><wbr />get<wbr />Client<wbr />Position<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setSize%2CWindow%2CwSize"
-    title="setSize(window: Window; size: wSize)"><wbr />set<wbr />Size<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setSize%2CWindow%2Cint%2Cint"
-    title="setSize(window: Window; width: int; height: int)"><wbr />set<wbr />Size<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getSize%2CWindow"
-    title="getSize(window: Window): wSize"><wbr />get<wbr />Size<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getRect%2CWindow"
-    title="getRect(window: Window): wRect"><wbr />get<wbr />Rect<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setRect%2CWindow%2CwRect"
-    title="setRect(window: Window; rect: wRect)"><wbr />set<wbr />Rect<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setRect%2CWindow%2Cint%2Cint%2Cint%2Cint"
-    title="setRect(window: Window; x: int; y: int; width: int; height: int)"><wbr />set<wbr />Rect<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getCaretPos%2CWindow"
-    title="getCaretPos(window: Window): wPoint"><wbr />get<wbr />Caret<wbr />Pos<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getClientSize%2CWindow"
-    title="getClientSize(window: Window): wSize"><wbr />get<wbr />Client<wbr />Size<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getProcess%2CWindow"
-    title="getProcess(window: Window): Process"><wbr />get<wbr />Process<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getParent%2CWindow"
-    title="getParent(window: Window): Window"><wbr />get<wbr />Parent<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getChildren%2CWindow"
-    title="getChildren(window: Window): seq[Window]"><wbr />get<wbr />Children<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getActiveWindow"
-    title="getActiveWindow(): Window"><wbr />get<wbr />Active<wbr />Window<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setTransparent%2CWindow%2Crange%5B%5D"
-    title="setTransparent(window: Window; alpha: range[0 .. 255])"><wbr />set<wbr />Transparent<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getTransparent%2CWindow"
-    title="getTransparent(window: Window): int"><wbr />get<wbr />Transparent<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setOnTop%2CWindow"
-    title="setOnTop(window: Window; flag = true)"><wbr />set<wbr />On<wbr />Top<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isExists%2CWindow"
-    title="isExists(window: Window): bool"><wbr />is<wbr />Exists<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isVisible%2CWindow"
-    title="isVisible(window: Window): bool"><wbr />is<wbr />Visible<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isEnabled%2CWindow"
-    title="isEnabled(window: Window): bool"><wbr />is<wbr />Enabled<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isActive%2CWindow"
-    title="isActive(window: Window): bool"><wbr />is<wbr />Active<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isMinimized%2CWindow"
-    title="isMinimized(window: Window): bool"><wbr />is<wbr />Minimized<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isMaximized%2CWindow"
-    title="isMaximized(window: Window): bool"><wbr />is<wbr />Maximized<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#isFocused%2CWindow"
-    title="isFocused(window: Window): bool"><wbr />is<wbr />Focused<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#activate%2CWindow"
-    title="activate(window: Window)"><wbr />activate<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#close%2CWindow"
-    title="close(window: Window)"><wbr />close<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#kill%2CWindow"
-    title="kill(window: Window; byProcess = true)"><wbr />kill<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#show%2CWindow"
-    title="show(window: Window)"><wbr />show<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#hide%2CWindow"
-    title="hide(window: Window)"><wbr />hide<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#enable%2CWindow"
-    title="enable(window: Window)"><wbr />enable<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#disable%2CWindow"
-    title="disable(window: Window)"><wbr />disable<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#minimize%2CWindow"
-    title="minimize(window: Window)"><wbr />minimize<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#maximize%2CWindow"
-    title="maximize(window: Window)"><wbr />maximize<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#restore%2CWindow"
-    title="restore(window: Window)"><wbr />restore<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#minimizeAll"
-    title="minimizeAll()"><wbr />minimize<wbr />All<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#minimizeAllUndo"
-    title="minimizeAllUndo()"><wbr />minimize<wbr />All<wbr />Undo<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#focus%2CWindow"
-    title="focus(window: Window)"><wbr />focus<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#click%2CWindow%2Cint"
-    title="click(window: Window; button = mbLeft; pos = wDefaultPoint; clicks = 1)"><wbr />click<span class="attachedType"></span></a></li>
+    title="`$`(x: Window): string">`$`(x: Window): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">==
+      <li><a class="reference" href="#%3D%3D%2CWindow%2CWindow"
+    title="`==`(x, y: Window): bool">`==`(x, y: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">activate
+      <li><a class="reference" href="#activate%2CWindow"
+    title="activate(window: Window)">activate(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">click
+      <li><a class="reference" href="#click%2CWindow%2Cint"
+    title="click(window: Window; button = mbLeft; pos = wDefaultPoint; clicks = 1)">click(window: Window; button = mbLeft; pos = wDefaultPoint; clicks = 1)</a></li>
   <li><a class="reference" href="#click%2CWindow%2CMenuItem"
-    title="click(window: Window; item: MenuItem)"><wbr />click<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#flash%2CWindow%2Cint%2Cint"
-    title="flash(window: Window; flashes = 4; delay = 500; wait = true)"><wbr />flash<span class="attachedType"></span></a></li>
+    title="click(window: Window; item: MenuItem)">click(window: Window; item: MenuItem)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">close
+      <li><a class="reference" href="#close%2CWindow"
+    title="close(window: Window)">close(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">disable
+      <li><a class="reference" href="#disable%2CWindow"
+    title="disable(window: Window)">disable(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">enable
+      <li><a class="reference" href="#enable%2CWindow"
+    title="enable(window: Window)">enable(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">flash
+      <li><a class="reference" href="#flash%2CWindow%2Cint%2Cint"
+    title="flash(window: Window; flashes = 4; delay = 500; wait = true)">flash(window: Window; flashes = 4; delay = 500; wait = true)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">focus
+      <li><a class="reference" href="#focus%2CWindow"
+    title="focus(window: Window)">focus(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getActiveWindow
+      <li><a class="reference" href="#getActiveWindow"
+    title="getActiveWindow(): Window">getActiveWindow(): Window</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getCaretPos
+      <li><a class="reference" href="#getCaretPos%2CWindow"
+    title="getCaretPos(window: Window): wPoint">getCaretPos(window: Window): wPoint</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getChildren
+      <li><a class="reference" href="#getChildren%2CWindow"
+    title="getChildren(window: Window): seq[Window]">getChildren(window: Window): seq[Window]</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getClassName
+      <li><a class="reference" href="#getClassName%2CWindow"
+    title="getClassName(window: Window): string">getClassName(window: Window): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getClientPosition
+      <li><a class="reference" href="#getClientPosition%2CWindow%2CwPoint"
+    title="getClientPosition(window: Window; pos: wPoint = (0, 0)): wPoint">getClientPosition(window: Window; pos: wPoint = (0, 0)): wPoint</a></li>
+  <li><a class="reference" href="#getClientPosition%2CWindow%2Cint%2Cint"
+    title="getClientPosition(window: Window; x: int; y: int): wPoint">getClientPosition(window: Window; x: int; y: int): wPoint</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getClientSize
+      <li><a class="reference" href="#getClientSize%2CWindow"
+    title="getClientSize(window: Window): wSize">getClientSize(window: Window): wSize</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getHandle
+      <li><a class="reference" href="#getHandle%2CWindow"
+    title="getHandle(window: Window): HWND">getHandle(window: Window): HWND</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getParent
+      <li><a class="reference" href="#getParent%2CWindow"
+    title="getParent(window: Window): Window">getParent(window: Window): Window</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getPosition
+      <li><a class="reference" href="#getPosition%2CWindow%2CwPoint"
+    title="getPosition(window: Window; pos: wPoint = (0, 0)): wPoint">getPosition(window: Window; pos: wPoint = (0, 0)): wPoint</a></li>
+  <li><a class="reference" href="#getPosition%2CWindow%2Cint%2Cint"
+    title="getPosition(window: Window; x: int; y: int): wPoint">getPosition(window: Window; x: int; y: int): wPoint</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getProcess
+      <li><a class="reference" href="#getProcess%2CWindow"
+    title="getProcess(window: Window): Process">getProcess(window: Window): Process</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getRect
+      <li><a class="reference" href="#getRect%2CWindow"
+    title="getRect(window: Window): wRect">getRect(window: Window): wRect</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getSize
+      <li><a class="reference" href="#getSize%2CWindow"
+    title="getSize(window: Window): wSize">getSize(window: Window): wSize</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getStatusBarText
+      <li><a class="reference" href="#getStatusBarText%2CWindow%2Cint"
+    title="getStatusBarText(window: Window; index = 0): string">getStatusBarText(window: Window; index = 0): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getText
+      <li><a class="reference" href="#getText%2CWindow"
+    title="getText(window: Window; detectHidden = false): string">getText(window: Window; detectHidden = false): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getTitle
+      <li><a class="reference" href="#getTitle%2CWindow"
+    title="getTitle(window: Window): string">getTitle(window: Window): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getTransparent
+      <li><a class="reference" href="#getTransparent%2CWindow"
+    title="getTransparent(window: Window): int">getTransparent(window: Window): int</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">hide
+      <li><a class="reference" href="#hide%2CWindow"
+    title="hide(window: Window)">hide(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isActive
+      <li><a class="reference" href="#isActive%2CWindow"
+    title="isActive(window: Window): bool">isActive(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isEnabled
+      <li><a class="reference" href="#isEnabled%2CWindow"
+    title="isEnabled(window: Window): bool">isEnabled(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isExists
+      <li><a class="reference" href="#isExists%2CWindow"
+    title="isExists(window: Window): bool">isExists(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isFocused
+      <li><a class="reference" href="#isFocused%2CWindow"
+    title="isFocused(window: Window): bool">isFocused(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isMaximized
+      <li><a class="reference" href="#isMaximized%2CWindow"
+    title="isMaximized(window: Window): bool">isMaximized(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isMinimized
+      <li><a class="reference" href="#isMinimized%2CWindow"
+    title="isMinimized(window: Window): bool">isMinimized(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isVisible
+      <li><a class="reference" href="#isVisible%2CWindow"
+    title="isVisible(window: Window): bool">isVisible(window: Window): bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">kill
+      <li><a class="reference" href="#kill%2CWindow"
+    title="kill(window: Window; byProcess = true)">kill(window: Window; byProcess = true)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">maximize
+      <li><a class="reference" href="#maximize%2CWindow"
+    title="maximize(window: Window)">maximize(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">minimize
+      <li><a class="reference" href="#minimize%2CWindow"
+    title="minimize(window: Window)">minimize(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">minimizeAll
+      <li><a class="reference" href="#minimizeAll"
+    title="minimizeAll()">minimizeAll()</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">minimizeAllUndo
+      <li><a class="reference" href="#minimizeAllUndo"
+    title="minimizeAllUndo()">minimizeAllUndo()</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">repr
+      <li><a class="reference" href="#repr%2CWindow"
+    title="repr(x: Window): string">repr(x: Window): string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">restore
+      <li><a class="reference" href="#restore%2CWindow"
+    title="restore(window: Window)">restore(window: Window)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setOnTop
+      <li><a class="reference" href="#setOnTop%2CWindow"
+    title="setOnTop(window: Window; flag = true)">setOnTop(window: Window; flag = true)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setPosition
+      <li><a class="reference" href="#setPosition%2CWindow%2CwPoint"
+    title="setPosition(window: Window; pos: wPoint)">setPosition(window: Window; pos: wPoint)</a></li>
+  <li><a class="reference" href="#setPosition%2CWindow%2Cint%2Cint"
+    title="setPosition(window: Window; x: int; y: int)">setPosition(window: Window; x: int; y: int)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setRect
+      <li><a class="reference" href="#setRect%2CWindow%2CwRect"
+    title="setRect(window: Window; rect: wRect)">setRect(window: Window; rect: wRect)</a></li>
+  <li><a class="reference" href="#setRect%2CWindow%2Cint%2Cint%2Cint%2Cint"
+    title="setRect(window: Window; x: int; y: int; width: int; height: int)">setRect(window: Window; x: int; y: int; width: int; height: int)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setSize
+      <li><a class="reference" href="#setSize%2CWindow%2CwSize"
+    title="setSize(window: Window; size: wSize)">setSize(window: Window; size: wSize)</a></li>
+  <li><a class="reference" href="#setSize%2CWindow%2Cint%2Cint"
+    title="setSize(window: Window; width: int; height: int)">setSize(window: Window; width: int; height: int)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setTitle
+      <li><a class="reference" href="#setTitle%2CWindow%2Cstring"
+    title="setTitle(window: Window; title: string)">setTitle(window: Window; title: string)</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setTransparent
+      <li><a class="reference" href="#setTransparent%2CWindow%2Crange%5B%5D"
+    title="setTransparent(window: Window; alpha: range[0 .. 255])">setTransparent(window: Window; alpha: range[0 .. 255])</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">show
+      <li><a class="reference" href="#show%2CWindow"
+    title="show(window: Window)">show(window: Window)</a></li>
+
+  </ul>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#windows.i"
-    title="windows(): Window"><wbr />windows<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#windows.i%2CWindow"
-    title="windows(parent: Window): Window"><wbr />windows<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#allWindows.i"
-    title="allWindows(): Window"><wbr />all<wbr />Windows<span class="attachedType"></span></a></li>
+      <ul class="simple nested-toc-section">allWindows
+      <li><a class="reference" href="#allWindows.i"
+    title="allWindows(): Window">allWindows(): Window</a></li>
   <li><a class="reference" href="#allWindows.i%2CWindow"
-    title="allWindows(parent: Window): Window"><wbr />all<wbr />Windows<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#menuItems.i%2CWindow"
-    title="menuItems(window: Window): MenuItem"><wbr />menu<wbr />Items<span class="attachedType"></span></a></li>
+    title="allWindows(parent: Window): Window">allWindows(parent: Window): Window</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">menuItems
+      <li><a class="reference" href="#menuItems.i%2CWindow"
+    title="menuItems(window: Window): MenuItem">menuItems(window: Window): MenuItem</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">windows
+      <li><a class="reference" href="#windows.i"
+    title="windows(): Window">windows(): Window</a></li>
+  <li><a class="reference" href="#windows.i%2CWindow"
+    title="windows(parent: Window): Window">windows(parent: Window): Window</a></li>
+
+  </ul>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">enumerate
       <li><a class="reference" href="#enumerate.t%2Cuntyped"
-    title="enumerate(body: untyped): untyped"><wbr />enumerate<span class="attachedType"></span></a></li>
+    title="enumerate(body: untyped): untyped">enumerate(body: untyped): untyped</a></li>
   <li><a class="reference" href="#enumerate.t%2Cuntyped%2Cuntyped"
-    title="enumerate(parent: untyped; body: untyped): untyped"><wbr />enumerate<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#enumerateAll.t%2Cuntyped"
-    title="enumerateAll(body: untyped): untyped"><wbr />enumerate<wbr />All<span class="attachedType"></span></a></li>
+    title="enumerate(parent: untyped; body: untyped): untyped">enumerate(parent: untyped; body: untyped): untyped</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">enumerateAll
+      <li><a class="reference" href="#enumerateAll.t%2Cuntyped"
+    title="enumerateAll(body: untyped): untyped">enumerateAll(body: untyped): untyped</a></li>
   <li><a class="reference" href="#enumerateAll.t%2Cuntyped%2Cuntyped"
-    title="enumerateAll(parent: untyped; body: untyped): untyped"><wbr />enumerate<wbr />All<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#waitAny.t%2Cuntyped%2Cuntyped"
-    title="waitAny(condition: untyped; timeout: untyped = 0): untyped"><wbr />wait<wbr />Any<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#waitAll.t%2Cuntyped%2Cuntyped"
-    title="waitAll(condition: untyped; timeout: untyped = 0): untyped"><wbr />wait<wbr />All<span class="attachedType"></span></a></li>
+    title="enumerateAll(parent: untyped; body: untyped): untyped">enumerateAll(parent: untyped; body: untyped): untyped</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">waitAll
+      <li><a class="reference" href="#waitAll.t%2Cuntyped%2Cuntyped"
+    title="waitAll(condition: untyped; timeout: untyped = 0): untyped">waitAll(condition: untyped; timeout: untyped = 0): untyped</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">waitAny
+      <li><a class="reference" href="#waitAny.t%2Cuntyped%2Cuntyped"
+    title="waitAny(condition: untyped; timeout: untyped = 0): untyped">waitAny(condition: untyped; timeout: untyped = 0): untyped</a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -246,6 +407,7 @@ function main() {
 </ul>
 
   </div>
+  
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
@@ -254,535 +416,597 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="$,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%24%2CWindow"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">borrow</span></span><span class="Other">.}</span></span></pre></dt>
+<div id="$,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#%24%2CWindow"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span class="Identifier">borrow</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 The stringify operator for a window.
 
 </dd>
-<a id="==,Window,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%3D%3D%2CWindow%2CWindow"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">borrow</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="==,Window,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#%3D%3D%2CWindow%2CWindow"><span class="Identifier">`==`</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">,</span> <span class="Identifier">y</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">borrow</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Checks for equality between two window.
 
 </dd>
-<a id="repr,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#repr%2CWindow"><span class="Identifier">repr</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Returns string representation of a window.
-
-</dd>
-<a id="getHandle,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getHandle%2CWindow"><span class="Identifier">getHandle</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HWND</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Gets the Win32 hWnd from the specified window.
-
-</dd>
-<a id="getTitle,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getTitle%2CWindow"><span class="Identifier">getTitle</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the full title from a window.
-
-</dd>
-<a id="setTitle,Window,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setTitle%2CWindow%2Cstring"><span class="Identifier">setTitle</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Changes the title of a window.
-
-</dd>
-<a id="getClassName,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getClassName%2CWindow"><span class="Identifier">getClassName</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the class name from a window.
-
-</dd>
-<a id="getText,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getText%2CWindow"><span class="Identifier">getText</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">detectHidden</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the text from a window.
-
-</dd>
-<a id="getStatusBarText,Window,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getStatusBarText%2CWindow%2Cint"><span class="Identifier">getStatusBarText</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the text from a standard status bar control.
-
-</dd>
-<a id="getPosition,Window,wPoint"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getPosition%2CWindow%2CwPoint"><span class="Identifier">getPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the screen coordinates of specified window position.
-
-</dd>
-<a id="getPosition,Window,int,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getPosition%2CWindow%2Cint%2Cint"><span class="Identifier">getPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the screen coordinates of specified window position.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">import</span>
-  <span class="Identifier">mouse</span>
-
-<span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">move</span><span class="Other">(</span><span class="Identifier">activeWindow</span><span class="Other">(</span><span class="Other">)</span><span class="Other">.</span><span class="Identifier">position</span><span class="Other">(</span><span class="DecNumber">100</span><span class="Other">,</span> <span class="DecNumber">100</span><span class="Other">)</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="setPosition,Window,wPoint"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setPosition%2CWindow%2CwPoint"><span class="Identifier">setPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">wPoint</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Moves a window.
-
-</dd>
-<a id="setPosition,Window,int,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setPosition%2CWindow%2Cint%2Cint"><span class="Identifier">setPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Moves a window.
-
-</dd>
-<a id="getClientPosition,Window,wPoint"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getClientPosition%2CWindow%2CwPoint"><span class="Identifier">getClientPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the screen coordinates of specified client-area coordinates.
-
-</dd>
-<a id="getClientPosition,Window,int,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getClientPosition%2CWindow%2Cint%2Cint"><span class="Identifier">getClientPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the screen coordinates of specified client-area coordinates.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">import</span>
-  <span class="Identifier">mouse</span>
-
-<span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">move</span><span class="Other">(</span><span class="Identifier">activeWindow</span><span class="Other">(</span><span class="Other">)</span><span class="Other">.</span><span class="Identifier">clientPosition</span><span class="Other">(</span><span class="DecNumber">100</span><span class="Other">,</span> <span class="DecNumber">100</span><span class="Other">)</span><span class="Other">)</span>
-</pre>
-
-</dd>
-<a id="setSize,Window,wSize"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setSize%2CWindow%2CwSize"><span class="Identifier">setSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">wSize</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Resizes a window.
-
-</dd>
-<a id="setSize,Window,int,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setSize%2CWindow%2Cint%2Cint"><span class="Identifier">setSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Resizes a window.
-
-</dd>
-<a id="getSize,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getSize%2CWindow"><span class="Identifier">getSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wSize</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the position of a given window.
-
-</dd>
-<a id="getRect,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getRect%2CWindow"><span class="Identifier">getRect</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wRect</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the position and size of a given window.
-
-</dd>
-<a id="setRect,Window,wRect"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setRect%2CWindow%2CwRect"><span class="Identifier">setRect</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">wRect</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Moves and resizes a window.
-
-</dd>
-<a id="setRect,Window,int,int,int,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setRect%2CWindow%2Cint%2Cint%2Cint%2Cint"><span class="Identifier">setRect</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Moves and resizes a window.
-
-</dd>
-<a id="getCaretPos,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getCaretPos%2CWindow"><span class="Identifier">getCaretPos</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Returns the coordinates of the caret in the given window (works for foreground window only).
-
-</dd>
-<a id="getClientSize,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getClientSize%2CWindow"><span class="Identifier">getClientSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wSize</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the size of a given window's client area.
-
-</dd>
-<a id="getProcess,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getProcess%2CWindow"><span class="Identifier">getProcess</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Process"><span class="Identifier">Process</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the process associated with a window.
-
-</dd>
-<a id="getParent,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getParent%2CWindow"><span class="Identifier">getParent</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the parent of a given window.
-
-</dd>
-<a id="getChildren,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getChildren%2CWindow"><span class="Identifier">getChildren</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Retrieves the children of a given window.
-
-</dd>
-<a id="getActiveWindow"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getActiveWindow"><span class="Identifier">getActiveWindow</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Get the currently active window
-
-</dd>
-<a id="setTransparent,Window,range[]"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setTransparent%2CWindow%2Crange%5B%5D"><span class="Identifier">setTransparent</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Sets the transparency of a window. A value of 0 sets the window to be fully transparent.
-
-</dd>
-<a id="getTransparent,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getTransparent%2CWindow"><span class="Identifier">getTransparent</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Gets the transparency of a window. Return -1 if failed.
-
-</dd>
-<a id="setOnTop,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setOnTop%2CWindow"><span class="Identifier">setOnTop</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">flag</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Change a window's &quot;Always On Top&quot; attribute.
-
-</dd>
-<a id="isExists,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isExists%2CWindow"><span class="Identifier">isExists</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window exists.
-
-</dd>
-<a id="isVisible,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isVisible%2CWindow"><span class="Identifier">isVisible</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window is currently visible.
-
-</dd>
-<a id="isEnabled,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isEnabled%2CWindow"><span class="Identifier">isEnabled</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window is currently enabled.
-
-</dd>
-<a id="isActive,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isActive%2CWindow"><span class="Identifier">isActive</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window is currently active.
-
-</dd>
-<a id="isMinimized,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isMinimized%2CWindow"><span class="Identifier">isMinimized</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window is currently minimized.
-
-</dd>
-<a id="isMaximized,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isMaximized%2CWindow"><span class="Identifier">isMaximized</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window is currently maximized.
-
-</dd>
-<a id="isFocused,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#isFocused%2CWindow"><span class="Identifier">isFocused</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Checks to see if a specified window has the focus.
-
-</dd>
-<a id="activate,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#activate%2CWindow"><span class="Identifier">activate</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="activate,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#activate%2CWindow"><span class="Identifier">activate</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Activates (gives focus to) a window.
 
 </dd>
-<a id="close,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#close%2CWindow"><span class="Identifier">close</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Closes a window.
-
-</dd>
-<a id="kill,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#kill%2CWindow"><span class="Identifier">kill</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">byProcess</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Forces a window to close by terminating the related process or thread.
-
-</dd>
-<a id="show,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#show%2CWindow"><span class="Identifier">show</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Shows window.
-
-</dd>
-<a id="hide,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#hide%2CWindow"><span class="Identifier">hide</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Hides window.
-
-</dd>
-<a id="enable,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#enable%2CWindow"><span class="Identifier">enable</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Enables the window.
-
-</dd>
-<a id="disable,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#disable%2CWindow"><span class="Identifier">disable</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Disables the window.
-
-</dd>
-<a id="minimize,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#minimize%2CWindow"><span class="Identifier">minimize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Minimize the window.
-
-</dd>
-<a id="maximize,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#maximize%2CWindow"><span class="Identifier">maximize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Maximize the window.
-
-</dd>
-<a id="restore,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#restore%2CWindow"><span class="Identifier">restore</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Undoes a window minimization or maximization
-
-</dd>
-<a id="minimizeAll"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#minimizeAll"><span class="Identifier">minimizeAll</span></a><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Minimizes all windows. Equal to send(&quot;#m&quot;).
-
-</dd>
-<a id="minimizeAllUndo"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#minimizeAllUndo"><span class="Identifier">minimizeAllUndo</span></a><span class="Other">(</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Undoes a previous minimizeAll(). Equal to send(&quot;#+m&quot;).
-
-</dd>
-<a id="focus,Window"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#focus%2CWindow"><span class="Identifier">focus</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Focus a window.
-
-</dd>
-<a id="click,Window,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#click%2CWindow%2Cint"><span class="Identifier">click</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">button</span> <span class="Other">=</span> <span class="Identifier">mbLeft</span><span class="Other">;</span> <span class="Identifier">pos</span> <span class="Other">=</span> <span class="Identifier">wDefaultPoint</span><span class="Other">;</span> <span class="Identifier">clicks</span> <span class="Other">=</span> <span class="DecNumber">1</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="click,Window,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#click%2CWindow%2Cint"><span class="Identifier">click</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">button</span> <span class="Other">=</span> <span class="Identifier">mbLeft</span><span class="Other">;</span> <span class="Identifier">pos</span> <span class="Other">=</span> <span class="Identifier">wDefaultPoint</span><span class="Other">;</span> <span class="Identifier">clicks</span> <span class="Other">=</span> <span class="DecNumber">1</span><span class="Other">)</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Sends a mouse click command to a given window. The default position is center.
 
 </dd>
-<a id="click,Window,MenuItem"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#click%2CWindow%2CMenuItem"><span class="Identifier">click</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">item</span><span class="Other">:</span> <a href="common.html#MenuItem"><span class="Identifier">MenuItem</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="click,Window,MenuItem">
+<dt><pre><span class="Keyword">proc</span> <a href="#click%2CWindow%2CMenuItem"><span class="Identifier">click</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">item</span><span class="Other">:</span> <a href="common.html#MenuItem"><span class="Identifier">MenuItem</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Invokes a menu item of a window.
 
 </dd>
-<a id="flash,Window,int,int"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#flash%2CWindow%2Cint%2Cint"><span class="Identifier">flash</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">flashes</span> <span class="Other">=</span> <span class="DecNumber">4</span><span class="Other">;</span> <span class="Identifier">delay</span> <span class="Other">=</span> <span class="DecNumber">500</span><span class="Other">;</span> <span class="Identifier">wait</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="close,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#close%2CWindow"><span class="Identifier">close</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Closes a window.
+
+</dd>
+</div>
+<div id="disable,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#disable%2CWindow"><span class="Identifier">disable</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Disables the window.
+
+</dd>
+</div>
+<div id="enable,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#enable%2CWindow"><span class="Identifier">enable</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Enables the window.
+
+</dd>
+</div>
+<div id="flash,Window,int,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#flash%2CWindow%2Cint%2Cint"><span class="Identifier">flash</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">flashes</span> <span class="Other">=</span> <span class="DecNumber">4</span><span class="Other">;</span> <span class="Identifier">delay</span> <span class="Other">=</span> <span class="DecNumber">500</span><span class="Other">;</span> <span class="Identifier">wait</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Flashes a window in the taskbar.
 
 </dd>
+</div>
+<div id="focus,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#focus%2CWindow"><span class="Identifier">focus</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Focus a window.
+
+</dd>
+</div>
+<div id="getActiveWindow">
+<dt><pre><span class="Keyword">proc</span> <a href="#getActiveWindow"><span class="Identifier">getActiveWindow</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Get the currently active window.
+
+</dd>
+</div>
+<div id="getCaretPos,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getCaretPos%2CWindow"><span class="Identifier">getCaretPos</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Returns the coordinates of the caret in the given window (works for foreground window only).
+
+</dd>
+</div>
+<div id="getChildren,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getChildren%2CWindow"><span class="Identifier">getChildren</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">]</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the children of a given window.
+
+</dd>
+</div>
+<div id="getClassName,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getClassName%2CWindow"><span class="Identifier">getClassName</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the class name from a window.
+
+</dd>
+</div>
+<div id="getClientPosition,Window,wPoint">
+<dt><pre><span class="Keyword">proc</span> <a href="#getClientPosition%2CWindow%2CwPoint"><span class="Identifier">getClientPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the screen coordinates of specified client-area coordinates.
+
+</dd>
+</div>
+<div id="getClientPosition,Window,int,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getClientPosition%2CWindow%2Cint%2Cint"><span class="Identifier">getClientPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the screen coordinates of specified client-area coordinates.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">mouse</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">move</span><span class="Punctuation">(</span><span class="Identifier">activeWindow</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">clientPosition</span><span class="Punctuation">(</span><span class="DecNumber">100</span><span class="Punctuation">,</span> <span class="DecNumber">100</span><span class="Punctuation">)</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="getClientSize,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getClientSize%2CWindow"><span class="Identifier">getClientSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wSize</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the size of a given window's client area.
+
+</dd>
+</div>
+<div id="getHandle,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getHandle%2CWindow"><span class="Identifier">getHandle</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HWND</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Gets the Win32 hWnd from the specified window.
+
+</dd>
+</div>
+<div id="getParent,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getParent%2CWindow"><span class="Identifier">getParent</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the parent of a given window.
+
+</dd>
+</div>
+<div id="getPosition,Window,wPoint">
+<dt><pre><span class="Keyword">proc</span> <a href="#getPosition%2CWindow%2CwPoint"><span class="Identifier">getPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">wPoint</span> <span class="Other">=</span> <span class="Other">(</span><span class="DecNumber">0</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the screen coordinates of specified window position.
+
+</dd>
+</div>
+<div id="getPosition,Window,int,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getPosition%2CWindow%2Cint%2Cint"><span class="Identifier">getPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wPoint</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the screen coordinates of specified window position.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">mouse</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">move</span><span class="Punctuation">(</span><span class="Identifier">activeWindow</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">position</span><span class="Punctuation">(</span><span class="DecNumber">100</span><span class="Punctuation">,</span> <span class="DecNumber">100</span><span class="Punctuation">)</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="getProcess,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getProcess%2CWindow"><span class="Identifier">getProcess</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Process"><span class="Identifier">Process</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the process associated with a window.
+
+</dd>
+</div>
+<div id="getRect,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getRect%2CWindow"><span class="Identifier">getRect</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wRect</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the position and size of a given window.
+
+</dd>
+</div>
+<div id="getSize,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getSize%2CWindow"><span class="Identifier">getSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">wSize</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the size of a given window.
+
+</dd>
+</div>
+<div id="getStatusBarText,Window,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#getStatusBarText%2CWindow%2Cint"><span class="Identifier">getStatusBarText</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">index</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the text from a standard status bar control.
+
+</dd>
+</div>
+<div id="getText,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getText%2CWindow"><span class="Identifier">getText</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">detectHidden</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the text from a window.
+
+</dd>
+</div>
+<div id="getTitle,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getTitle%2CWindow"><span class="Identifier">getTitle</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Retrieves the full title from a window.
+
+</dd>
+</div>
+<div id="getTransparent,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#getTransparent%2CWindow"><span class="Identifier">getTransparent</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Gets the transparency of a window. Return -1 if failed.
+
+</dd>
+</div>
+<div id="hide,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#hide%2CWindow"><span class="Identifier">hide</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Hides window.
+
+</dd>
+</div>
+<div id="isActive,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isActive%2CWindow"><span class="Identifier">isActive</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window is currently active.
+
+</dd>
+</div>
+<div id="isEnabled,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isEnabled%2CWindow"><span class="Identifier">isEnabled</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window is currently enabled.
+
+</dd>
+</div>
+<div id="isExists,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isExists%2CWindow"><span class="Identifier">isExists</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window exists.
+
+</dd>
+</div>
+<div id="isFocused,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isFocused%2CWindow"><span class="Identifier">isFocused</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window has the focus.
+
+</dd>
+</div>
+<div id="isMaximized,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isMaximized%2CWindow"><span class="Identifier">isMaximized</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window is currently maximized.
+
+</dd>
+</div>
+<div id="isMinimized,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isMinimized%2CWindow"><span class="Identifier">isMinimized</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window is currently minimized.
+
+</dd>
+</div>
+<div id="isVisible,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#isVisible%2CWindow"><span class="Identifier">isVisible</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Checks to see if a specified window is currently visible.
+
+</dd>
+</div>
+<div id="kill,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#kill%2CWindow"><span class="Identifier">kill</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">byProcess</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Forces a window to close by terminating the related process or thread.
+
+</dd>
+</div>
+<div id="maximize,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#maximize%2CWindow"><span class="Identifier">maximize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Maximize the window.
+
+</dd>
+</div>
+<div id="minimize,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#minimize%2CWindow"><span class="Identifier">minimize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Minimize the window.
+
+</dd>
+</div>
+<div id="minimizeAll">
+<dt><pre><span class="Keyword">proc</span> <a href="#minimizeAll"><span class="Identifier">minimizeAll</span></a><span class="Other">(</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Minimizes all windows. Equal to send(&quot;#m&quot;).
+
+</dd>
+</div>
+<div id="minimizeAllUndo">
+<dt><pre><span class="Keyword">proc</span> <a href="#minimizeAllUndo"><span class="Identifier">minimizeAllUndo</span></a><span class="Other">(</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Undoes a previous minimizeAll(). Equal to send(&quot;#+m&quot;).
+
+</dd>
+</div>
+<div id="repr,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#repr%2CWindow"><span class="Identifier">repr</span></a><span class="Other">(</span><span class="Identifier">x</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Returns string representation of a window.
+
+</dd>
+</div>
+<div id="restore,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#restore%2CWindow"><span class="Identifier">restore</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Undoes a window minimization or maximization
+
+</dd>
+</div>
+<div id="setOnTop,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#setOnTop%2CWindow"><span class="Identifier">setOnTop</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">flag</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Change a window's &quot;Always On Top&quot; attribute.
+
+</dd>
+</div>
+<div id="setPosition,Window,wPoint">
+<dt><pre><span class="Keyword">proc</span> <a href="#setPosition%2CWindow%2CwPoint"><span class="Identifier">setPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">pos</span><span class="Other">:</span> <span class="Identifier">wPoint</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Moves a window.
+
+</dd>
+</div>
+<div id="setPosition,Window,int,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#setPosition%2CWindow%2Cint%2Cint"><span class="Identifier">setPosition</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Moves a window.
+
+</dd>
+</div>
+<div id="setRect,Window,wRect">
+<dt><pre><span class="Keyword">proc</span> <a href="#setRect%2CWindow%2CwRect"><span class="Identifier">setRect</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">rect</span><span class="Other">:</span> <span class="Identifier">wRect</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Moves and resizes a window.
+
+</dd>
+</div>
+<div id="setRect,Window,int,int,int,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#setRect%2CWindow%2Cint%2Cint%2Cint%2Cint"><span class="Identifier">setRect</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">x</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">y</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Moves and resizes a window.
+
+</dd>
+</div>
+<div id="setSize,Window,wSize">
+<dt><pre><span class="Keyword">proc</span> <a href="#setSize%2CWindow%2CwSize"><span class="Identifier">setSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">wSize</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Resizes a window.
+
+</dd>
+</div>
+<div id="setSize,Window,int,int">
+<dt><pre><span class="Keyword">proc</span> <a href="#setSize%2CWindow%2Cint%2Cint"><span class="Identifier">setSize</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Resizes a window.
+
+</dd>
+</div>
+<div id="setTitle,Window,string">
+<dt><pre><span class="Keyword">proc</span> <a href="#setTitle%2CWindow%2Cstring"><span class="Identifier">setTitle</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Changes the title of a window.
+
+</dd>
+</div>
+<div id="setTransparent,Window,range[]">
+<dt><pre><span class="Keyword">proc</span> <a href="#setTransparent%2CWindow%2Crange%5B%5D"><span class="Identifier">setTransparent</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">;</span> <span class="Identifier">alpha</span><span class="Other">:</span> <span class="Identifier">range</span><span class="Other">[</span><span class="DecNumber">0</span> <span class="Operator">..</span> <span class="DecNumber">255</span><span class="Other">]</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Sets the transparency of a window. A value of 0 sets the window to be fully transparent.
+
+</dd>
+</div>
+<div id="show,Window">
+<dt><pre><span class="Keyword">proc</span> <a href="#show%2CWindow"><span class="Identifier">show</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Shows window.
+
+</dd>
+</div>
 
 </dl></div>
 <div class="section" id="15">
 <h1><a class="toc-backref" href="#15">Iterators</a></h1>
 <dl class="item">
-<a id="windows.i"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#windows.i"><span class="Identifier">windows</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Iterates over all the top-level windows.
-
-</dd>
-<a id="windows.i,Window"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#windows.i%2CWindow"><span class="Identifier">windows</span></a><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Iterates over the children that belong to the specified parent window.
-
-</dd>
-<a id="allWindows.i"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#allWindows.i"><span class="Identifier">allWindows</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<div id="allWindows.i">
+<dt><pre><span class="Keyword">iterator</span> <a href="#allWindows.i"><span class="Identifier">allWindows</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Iterates over all top-level windows and their descendants.
 
 </dd>
-<a id="allWindows.i,Window"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#allWindows.i%2CWindow"><span class="Identifier">allWindows</span></a><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="allWindows.i,Window">
+<dt><pre><span class="Keyword">iterator</span> <a href="#allWindows.i%2CWindow"><span class="Identifier">allWindows</span></a><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Iterates over all the descendants that belong to the specified window.
 
 </dd>
-<a id="menuItems.i,Window"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#menuItems.i%2CWindow"><span class="Identifier">menuItems</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#MenuItem"><span class="Identifier">MenuItem</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+</div>
+<div id="menuItems.i,Window">
+<dt><pre><span class="Keyword">iterator</span> <a href="#menuItems.i%2CWindow"><span class="Identifier">menuItems</span></a><span class="Other">(</span><span class="Identifier">window</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#MenuItem"><span class="Identifier">MenuItem</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
 <dd>
 
 Iterates over all the menu items in the specified window.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">import</span>
-  <span class="Identifier">strutils</span>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">strutils</span>
 
-<span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Keyword">for</span> <span class="Identifier">window</span> <span class="Keyword">in</span> <span class="Identifier">windows</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span>
-    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Other">:</span>
-      <span class="Keyword">for</span> <span class="Identifier">item</span> <span class="Keyword">in</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">menuItems</span><span class="Other">:</span>
-        <span class="Keyword">if</span> <span class="StringLit">&quot;Ctrl+O&quot;</span> <span class="Keyword">in</span> <span class="Identifier">item</span><span class="Other">.</span><span class="Identifier">text</span><span class="Other">:</span>
-          <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">click</span><span class="Other">(</span><span class="Identifier">item</span><span class="Other">)</span>
-      <span class="Keyword">break</span>
-</pre>
+<span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Keyword">for</span> <span class="Identifier">window</span> <span class="Keyword">in</span> <span class="Identifier">windows</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
+    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Punctuation">:</span>
+      <span class="Keyword">for</span> <span class="Identifier">item</span> <span class="Keyword">in</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">menuItems</span><span class="Punctuation">:</span>
+        <span class="Keyword">if</span> <span class="StringLit">&quot;Ctrl+O&quot;</span> <span class="Keyword">in</span> <span class="Identifier">item</span><span class="Operator">.</span><span class="Identifier">text</span><span class="Punctuation">:</span>
+          <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">click</span><span class="Punctuation">(</span><span class="Identifier">item</span><span class="Punctuation">)</span>
+      <span class="Keyword">break</span></pre>
 
 </dd>
+</div>
+<div id="windows.i">
+<dt><pre><span class="Keyword">iterator</span> <a href="#windows.i"><span class="Identifier">windows</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Iterates over all the top-level windows.
+
+</dd>
+</div>
+<div id="windows.i,Window">
+<dt><pre><span class="Keyword">iterator</span> <a href="#windows.i%2CWindow"><span class="Identifier">windows</span></a><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span><span class="Other">:</span> <a href="common.html#Window"><span class="Identifier">Window</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Iterates over the children that belong to the specified parent window.
+
+</dd>
+</div>
 
 </dl></div>
 <div class="section" id="18">
 <h1><a class="toc-backref" href="#18">Templates</a></h1>
 <dl class="item">
-<a id="enumerate.t,untyped"></a>
+<div id="enumerate.t,untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#enumerate.t%2Cuntyped"><span class="Identifier">enumerate</span></a><span class="Other">(</span><span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 Enumerates all the top-level windows. A <em>window</em> symbol is injected into the body. The template can return a seq[Window] that collects all <em>window</em> if the body can be evaluated as true. Use <em>enumerateBreak</em> template to break the enumeration.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">echo</span> <span class="Identifier">enumerate</span><span class="Other">(</span><span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">title</span> <span class="Operator">!=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span>
-</pre>
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">enumerate</span><span class="Other">:</span>
-    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Other">:</span>
-      <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">title</span>
-      <span class="Identifier">enumerateBreak</span>
-</pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">echo</span> <span class="Identifier">enumerate</span><span class="Punctuation">(</span><span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">title</span> <span class="Operator">!=</span> <span class="StringLit">&quot;&quot;</span><span class="Punctuation">)</span></pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">enumerate</span><span class="Punctuation">:</span>
+    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Punctuation">:</span>
+      <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">title</span>
+      <span class="Identifier">enumerateBreak</span></pre>
 
 </dd>
-<a id="enumerate.t,untyped,untyped"></a>
+</div>
+<div id="enumerate.t,untyped,untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#enumerate.t%2Cuntyped%2Cuntyped"><span class="Identifier">enumerate</span></a><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 Enumerates the children that belong to the specified parent window. A <em>window</em> symbol is injected into the body. The template can return a seq[Window] that collects all <em>window</em> if the body can be evaluated as true. Use <em>enumerateBreak</em> template to break the enumeration.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">enumerate</span><span class="Other">:</span>
-    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Other">:</span>
-      <span class="Identifier">enumerate</span><span class="Other">(</span><span class="Identifier">window</span><span class="Other">)</span><span class="Other">:</span>
-        <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span>
-      <span class="Identifier">enumerateBreak</span>
-</pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">enumerate</span><span class="Punctuation">:</span>
+    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Punctuation">:</span>
+      <span class="Identifier">enumerate</span><span class="Punctuation">(</span><span class="Identifier">window</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
+        <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span>
+
+      <span class="Identifier">enumerateBreak</span></pre>
 
 </dd>
-<a id="enumerateAll.t,untyped"></a>
+</div>
+<div id="enumerateAll.t,untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#enumerateAll.t%2Cuntyped"><span class="Identifier">enumerateAll</span></a><span class="Other">(</span><span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 Enumerates all top-level windows and their descendants. A <em>window</em> symbol is injected into the body. The template can return a seq[Window] that collects all <em>window</em> if the body can be evaluated as true. Use <em>enumerateBreak</em> template to break the enumeration.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">enumerateAll</span><span class="Other">:</span>
-    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Button&quot;</span> <span class="Keyword">and</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">title</span> <span class="Operator">!=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">:</span>
-      <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">repr</span>
-</pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">enumerateAll</span><span class="Punctuation">:</span>
+    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Button&quot;</span> <span class="Keyword">and</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">title</span> <span class="Operator">!=</span> <span class="StringLit">&quot;&quot;</span><span class="Punctuation">:</span>
+      <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">repr</span></pre>
 
 </dd>
-<a id="enumerateAll.t,untyped,untyped"></a>
+</div>
+<div id="enumerateAll.t,untyped,untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#enumerateAll.t%2Cuntyped%2Cuntyped"><span class="Identifier">enumerateAll</span></a><span class="Other">(</span><span class="Identifier">parent</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 Enumerates all the descendants that belong to the specified window. A <em>window</em> symbol is injected into the body. The template can return a seq[Window] that collects all <em>window</em> if the body can be evaluated as true. Use <em>enumerateBreak</em> template to break the enumeration.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">enumerate</span><span class="Other">:</span>
-    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Other">:</span>
-      <span class="Identifier">enumerateAll</span><span class="Other">(</span><span class="Identifier">window</span><span class="Other">)</span><span class="Other">:</span>
-        <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span>
-      <span class="Identifier">enumerateBreak</span>
-</pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">enumerate</span><span class="Punctuation">:</span>
+    <span class="Keyword">if</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Punctuation">:</span>
+      <span class="Identifier">enumerateAll</span><span class="Punctuation">(</span><span class="Identifier">window</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
+        <span class="Identifier">echo</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span>
+
+      <span class="Identifier">enumerateBreak</span></pre>
 
 </dd>
-<a id="waitAny.t,untyped,untyped"></a>
+</div>
+<div id="waitAll.t,untyped,untyped">
+<dt><pre><span class="Keyword">template</span> <a href="#waitAll.t%2Cuntyped%2Cuntyped"><span class="Identifier">waitAll</span></a><span class="Other">(</span><span class="Identifier">condition</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">timeout</span><span class="Other">:</span> <span class="Identifier">untyped</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+Repeatly examines all the top-level windows until condition becomes true for all windows. A <em>window</em> symbol is injected into the condition. <em>timeout</em> specifies how long to wait (in seconds). Default (0) is to wait indefinitely.
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">waitAll</span><span class="Punctuation">(</span><span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">!=</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Punctuation">)</span></pre>
+
+</dd>
+</div>
+<div id="waitAny.t,untyped,untyped">
 <dt><pre><span class="Keyword">template</span> <a href="#waitAny.t%2Cuntyped%2Cuntyped"><span class="Identifier">waitAny</span></a><span class="Other">(</span><span class="Identifier">condition</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">timeout</span><span class="Other">:</span> <span class="Identifier">untyped</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 Repeatly examines all the top-level windows until condition becomes true for any window. A <em>window</em> symbol is injected into the condition. <em>timeout</em> specifies how long to wait (in seconds). Default (0) is to wait indefinitely. The template can return the <em>window</em> that match the condition.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">waitAny</span><span class="Other">(</span><span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span> <span class="Keyword">and</span> <span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">isActive</span><span class="Other">)</span>
-</pre>
+<p><strong class="examples_text">Example:</strong></p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Operator">=</span>
+  <span class="Identifier">waitAny</span><span class="Punctuation">(</span><span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">className</span> <span class="Operator">==</span> <span class="StringLit">&quot;Notepad&quot;</span> <span class="Keyword">and</span> <span class="Identifier">window</span><span class="Operator">.</span><span class="Identifier">isActive</span><span class="Punctuation">)</span></pre>
 
 </dd>
-<a id="waitAll.t,untyped,untyped"></a>
-<dt><pre><span class="Keyword">template</span> <a href="#waitAll.t%2Cuntyped%2Cuntyped"><span class="Identifier">waitAll</span></a><span class="Other">(</span><span class="Identifier">condition</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">timeout</span><span class="Other">:</span> <span class="Identifier">untyped</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
-<dd>
-
-Repeatly examines all the top-level windows until condition becomes true for all window. A <em>window</em> symbol is injected into the condition. <em>timeout</em> specifies how long to wait (in seconds). Default (0) is to wait indefinitely.
-<p><strong class="examples_text">Examples:</strong></p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">example</span><span class="Other">(</span><span class="Other">)</span> <span class="Other">=</span>
-  <span class="Identifier">waitAll</span><span class="Other">(</span><span class="Identifier">window</span><span class="Other">.</span><span class="Identifier">className</span> <span class="Operator">!=</span> <span class="StringLit">&quot;Notepad&quot;</span><span class="Other">)</span>
-</pre>
-
-</dd>
+</div>
 
 </dl></div>
 
@@ -794,7 +1018,7 @@ Repeatly examines all the top-level windows until condition becomes true for all
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim.</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-09-13 03:57:19 UTC</small>
       </div>
     </div>
   </div>

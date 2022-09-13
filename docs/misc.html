@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>wAuto</title>
+<title>wAuto/misc</title>
 <link rel="stylesheet" type="text/css" href="nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', main);
 <body>
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">wAuto</h1>
+    <h1 class="title">wAuto/misc</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -93,8 +93,22 @@ window.addEventListener('DOMContentLoaded', main);
     </ul>
   </div>
   <ul class="simple simple-toc" id="toc-list">
+<li>
+  <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
+  <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">isAdmin
+      <li><a class="reference" href="#isAdmin"
+    title="isAdmin(): bool">isAdmin(): bool</a></li>
 
+  </ul>
+  <ul class="simple nested-toc-section">requireAdmin
+      <li><a class="reference" href="#requireAdmin"
+    title="requireAdmin(raiseError = true)">requireAdmin(raiseError = true)</a></li>
 
+  </ul>
+
+  </ul>
+</li>
 
 </ul>
 
@@ -103,22 +117,28 @@ window.addEventListener('DOMContentLoaded', main);
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
-  <p class="module-desc"><p>wAuto is the Windows automation module for nim based on <a class="reference external" href="https://github.com/khchen/winim">winim</a> and <a class="reference external" href="https://github.com/khchen/wNim">wNim</a>. It contains support to simulate keystrokes and mouse movements, manipulate windows, processes, and registry. Some functions are inspired by <a class="reference external" href="https://www.autoitscript.com">AutoIt Script</a>.</p>
-<p>The getters and setters in wAuto, just like in wNim, can be simplized. For example:</p>
-<pre class="listing"><span class="Identifier">assert</span> <span class="Identifier">getPosition</span><span class="Punctuation">(</span><span class="Identifier">getActiveWindow</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">)</span> <span class="Operator">==</span> <span class="Identifier">activeWindow</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">position</span></pre><p>wAuto contains following submodules.</p>
-<ul class="simple"><li><a class="reference external" href="common.html">common</a></li>
-<li><a class="reference external" href="window.html">window</a></li>
-<li><a class="reference external" href="mouse.html">mouse</a></li>
-<li><a class="reference external" href="keyboard.html">keyboard</a></li>
-<li><a class="reference external" href="process.html">process</a></li>
-<li><a class="reference external" href="registry.html">registry</a></li>
-<li><a class="reference external" href="misc.html">misc</a></li>
-</ul>
-<p>Modules can be imoprted all in one, or be imported one by one. For example:</p>
-<pre class="listing"><span class="Keyword">import</span> <span class="Identifier">wAuto</span> <span class="Comment"># import all</span>
-<span class="Keyword">import</span> <span class="Identifier">wAuto</span><span class="Operator">/</span><span class="Identifier">window</span> <span class="Comment"># import window module only</span></pre></p>
-  
+  <p class="module-desc">This module contains misc. functions for wAuto.</p>
+  <div class="section" id="12">
+<h1><a class="toc-backref" href="#12">Procs</a></h1>
+<dl class="item">
+<div id="isAdmin">
+<dt><pre><span class="Keyword">proc</span> <a href="#isAdmin"><span class="Identifier">isAdmin</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
 
+Checks if the current user has full administrator privileges.
+
+</dd>
+</div>
+<div id="requireAdmin">
+<dt><pre><span class="Keyword">proc</span> <a href="#requireAdmin"><span class="Identifier">requireAdmin</span></a><span class="Other">(</span><span class="Identifier">raiseError</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></span>.}</pre></dt>
+<dd>
+
+Elevate the current process during runtime by restarting it. Raise an error if the user cancel it if <tt class="docutils literal"><span class="pre"><span class="Identifier">raiseError</span></span></tt> is true.
+
+</dd>
+</div>
+
+</dl></div>
 
   </div>
 </div>
@@ -127,7 +147,7 @@ window.addEventListener('DOMContentLoaded', main);
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-09-13 03:57:02 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-09-13 03:57:10 UTC</small>
       </div>
     </div>
   </div>

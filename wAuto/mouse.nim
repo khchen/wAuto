@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                   (c) Copyright 2020 Ward
+#                 (c) Copyright 2020-2022 Ward
 #
 #====================================================================
 
@@ -163,12 +163,14 @@ proc wheelUp*(clicks = 1) =
   ## Moves the mouse wheel up.
   ## *clicks* is the number of times to move the wheel.
   var coord = mouseMoveRaw(wDefaultPoint, 0)
-  sendMouseEvent(MOUSEEVENTF_ABSOLUTE or MOUSEEVENTF_WHEEL, coord, mouseData=WHEEL_DELTA)
-  sleep(opt("mouseclickdelay"))
+  for i in 0 ..< clicks:
+    sendMouseEvent(MOUSEEVENTF_ABSOLUTE or MOUSEEVENTF_WHEEL, coord, mouseData=WHEEL_DELTA)
+    sleep(opt("mouseclickdelay"))
 
 proc wheelDown*(clicks = 1) =
   ## Moves the mouse wheel down.
   ## *clicks* is the number of times to move the wheel.
   var coord = mouseMoveRaw(wDefaultPoint, 0)
-  sendMouseEvent(MOUSEEVENTF_ABSOLUTE or MOUSEEVENTF_WHEEL, coord, mouseData=(-WHEEL_DELTA))
-  sleep(opt("mouseclickdelay"))
+  for i in 0 ..< clicks:
+    sendMouseEvent(MOUSEEVENTF_ABSOLUTE or MOUSEEVENTF_WHEEL, coord, mouseData=(-WHEEL_DELTA))
+    sleep(opt("mouseclickdelay"))

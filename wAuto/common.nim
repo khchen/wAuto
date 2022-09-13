@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                   (c) Copyright 2020 Ward
+#                 (c) Copyright 2020-2022 Ward
 #
 #====================================================================
 
@@ -23,7 +23,6 @@ type
     ## Mouse buttons.
     mbLeft, mbRight, mbMiddle, mbPrimary, mbSecondary
 
-
   CursorShape* = enum
     ## Mouse cursor shapes.
     csUnknow, csHand, csAppStarting, csArrow, csCross, csHelp, csIBeam, csIcon,
@@ -33,6 +32,28 @@ type
   ProcessPriority* = enum
     ## Priority of process.
     ppError, ppIdle, ppBelowNormal, ppNormal, ppAboveNormal, ppHigh, ppRealtime
+
+  ProcessOption* = enum
+    ## Options to create child process.
+    ##
+    ## ================================  =============================================================
+    ## Options                           Description
+    ## ================================  =============================================================
+    ## poStdin                           Provide a handle to the child's STDIN stream
+    ## poStdout                          Provide a handle to the child's STDOUT stream
+    ## poStderr                          Provide a handle to the child's STDERR stream
+    ## poStderrMerged                    Provides the same handle for STDOUT and STDERR.
+    ## poShow                            Shown window.
+    ## poHide                            Hidden window.
+    ## poMaximize                        Maximized window.
+    ## poMinimize                        Minimized window.
+    ## poCreateNewConsole                The child console process should be created with it's own window instead of using the parent's window.
+    ## poLogonProfile                    Interactive logon with profile (for RunAs).
+    ## poLogonNetwork                    Network credentials only (for RunAs).
+    ## ================================  =============================================================
+    poStdin, poStdout, poStderr, poStderrMerged
+    poShow, poHide, poMaximize, poMinimize
+    poCreateNewConsole, poLogonProfile, poLogonNetwork
 
   Hotkey* = tuple[modifiers: int, keyCode: int]
     ## A tuple represents a hotkey combination. *modifiers* is a bitwise combination
@@ -73,8 +94,27 @@ type
     of rkRegQword: qword*: QWORD
     else: data*: string
 
+  ProcessStats* = object
+    readOperationCount*: ULONGLONG
+    writeOperationCount*: ULONGLONG
+    otherOperationCount*: ULONGLONG
+    readTransferCount*: ULONGLONG
+    writeTransferCount*: ULONGLONG
+    otherTransferCount*: ULONGLONG
+    pageFaultCount*: DWORD
+    peakWorkingSetSize*: SIZE_T
+    workingSetSize*: SIZE_T
+    quotaPeakPagedPoolUsage*: SIZE_T
+    quotaPagedPoolUsage*: SIZE_T
+    quotaPeakNonPagedPoolUsage*: SIZE_T
+    quotaNonPagedPoolUsage*: SIZE_T
+    pagefileUsage*: SIZE_T
+    peakPagefileUsage*: SIZE_T
+    gdiObjects*: DWORD
+    userObjects*: DWORD
+
 const
-  InvalidProcess* = Process 0
+  InvalidProcess* = Process -1
 
   InvalidWindow* = Window 0
 
