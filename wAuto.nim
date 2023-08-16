@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
@@ -34,8 +34,6 @@
 ## .. code-block:: Nim
 ##   import wAuto # import all
 ##   import wAuto/window # import window module only
-
-{.deadCodeElim: on.}
 
 import wAuto/[common, window, mouse, keyboard, process, registry, misc]
 export common, window, mouse, keyboard, process, registry, misc

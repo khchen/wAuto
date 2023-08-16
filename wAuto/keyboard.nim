@@ -1,13 +1,11 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
 ## This module contains support to simulate keystrokes.
-
-{.deadCodeElim: on.}
 
 import strutils, tables
 import winim/lean

@@ -1,3 +1,8 @@
+Version 1.3.0
+-------------
+* Update for Nim Compiler 2.0.
+* misc: add clipGet and clipPut.
+
 Version 1.2.0
 -------------
 * mouse: fix `clicks` not works in wheelUp and wheelDown.

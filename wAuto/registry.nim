@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
@@ -18,10 +18,8 @@
 ## When reading a REG_MULTI_SZ key the multiple entries are separated by '\\0' - use with .split('\\0')
 ## to get a seq of each entry.
 ##
-## It is possible to access remote registries by using a keyname in the form *r"⧵⧵computername⧵keyname"*.
+## It is possible to access remote registries by using a keyname in the form *r"\\\\computername\\keyname"*.
 ## To use this feature you must have the correct access rights.
-
-{.deadCodeElim: on.}
 
 import strutils, endians
 import winim/lean, winim/inc/shellapi
@@ -118,18 +116,18 @@ proc regRead*(key: string, value: string): RegData =
     proc example() =
       echo regRead(r"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "ProgramFilesDir")
 
-  block:
+  block okay:
     let hkey = regOpen(key, rrRead)
-    if hkey == 0: break
+    if hkey == 0: break okay
     defer: regClose(hkey)
 
     var size, kind: DWORD
     if RegQueryValueEx(hkey, value, nil, &kind, nil, &size) != ERROR_SUCCESS:
-      break
+      break okay
 
     var buffer = newString(size)
     if RegQueryValueEx(hkey, value, nil, &kind, cast[LPBYTE](&buffer), &size) != ERROR_SUCCESS:
-      break
+      break okay
 
     case kind
     of REG_DWORD:
@@ -172,11 +170,11 @@ proc regWrite*(key: string, name: string, value: RegData): bool {.discardable.} 
     proc example() =
       regWrite(r"HKEY_CURRENT_USER\Software\wAuto", "Key1", RegData(kind: rkRegSz, data: "Test"))
 
-  block:
-    if value.kind == rkRegError: break
+  block okay:
+    if value.kind == rkRegError: break okay
 
     let hkey = regOpen(key, rrWrite)
-    if hkey == 0: break
+    if hkey == 0: break okay
     defer: regClose(hkey)
 
     var buffer: string
@@ -207,7 +205,7 @@ proc regWrite*(key: string, name: string, value: RegData): bool {.discardable.} 
 
     if RegSetValueEx(hkey, name, 0, DWORD value.kind,
         cast[LPBYTE](&buffer), DWORD buffer.len) != ERROR_SUCCESS:
-      break
+      break okay
 
     return true
 

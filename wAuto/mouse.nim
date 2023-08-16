@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
@@ -11,8 +11,6 @@
 ##
 ## The *speed* parameter is the speed to move the mouse in the range 1 (fastest)
 ## to 100 (slowest). A speed of 0 will move the mouse instantly.
-
-{.deadCodeElim: on.}
 
 import tables
 import winim/lean except CURSORSHAPE
@@ -143,12 +141,12 @@ proc click*(button: MouseButton = mbLeft, pos = wDefaultPoint, clicks = 1, speed
     sendMouseEvent(MOUSEEVENTF_ABSOLUTE or up, coord)
     sleep(opt("mouseclickdelay"))
 
-proc click*(button: MouseButton, x, y = wDefault, clicks = 1, speed: range[0..100] = 10) =
+proc click*(button: MouseButton, x = wDefault, y = wDefault, clicks = 1, speed: range[0..100] = 10) =
   ## Perform a mouse click operation at the position (x, y).
   ## *clicks* is the number of times to click the mouse.
   click(button, (x, y), clicks, speed)
 
-proc clickDrag*(button: MouseButton = mbLeft, pos1, pos2 = wDefaultPoint, speed: range[0..100] = 10) =
+proc clickDrag*(button: MouseButton = mbLeft, pos1 = wDefaultPoint, pos2 = wDefaultPoint, speed: range[0..100] = 10) =
   ## Perform a mouse click and drag operation from *pos1* to *pos2*.
   let (down, up) = getMouseMessage(button)
   var coord = mouseMoveRaw(pos1, speed)

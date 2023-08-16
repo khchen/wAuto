@@ -1,7 +1,7 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
@@ -12,8 +12,6 @@
 ## enumerate() template can be break during enumeration if specified window is
 ## found. Moreover, the enumerate() template can aslo collect the window
 ## that match the specified condition.
-
-{.deadCodeElim: on.}
 
 import strutils
 import winim/lean, winim/inc/commctrl
@@ -79,22 +77,24 @@ proc enumDescendantsProc(hwnd: HWND, data: LPARAM): WINBOOL {.stdcall.} =
 
 proc enumChildrenTextProc(hwnd: HWND, data: LPARAM): WINBOOL {.stdcall.} =
   let pData = cast[ptr EnumTextData](data)
+  defer:
+    result = true # the callback return true to continue enumeration
 
   if IsWindowVisible(hwnd) == FALSE and not pData[].detectHidden:
-    return true
+    return
 
-  block:
-    var length: LRESULT
-    if SendMessageTimeout(hwnd, WM_GETTEXTLENGTH, 0, 0, SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&length)) == 0: break
+  var length: LRESULT
+  if SendMessageTimeout(hwnd, WM_GETTEXTLENGTH, 0, 0,
+    SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&length)) == 0: return
 
-    var buffer = T(length + 8)
-    var ret: int
+  var buffer = T(length + 8)
+  var ret: int
 
-    if SendMessageTimeout(hwnd, WM_GETTEXT, WPARAM buffer.len, cast[LPARAM](&buffer), SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&ret)) == 0: break
-    buffer.setLen(ret)
-    pData[].text.add($buffer & "\n")
+  if SendMessageTimeout(hwnd, WM_GETTEXT, WPARAM buffer.len, cast[LPARAM](&buffer),
+    SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&ret)) == 0: return
 
-  return true
+  buffer.setLen(ret)
+  pData[].text.add($buffer & "\n")
 
 proc enumChildren(callback: EnumWindowCallback) =
   # Enumerates all top-level windows.
@@ -152,24 +152,29 @@ proc getStatusBarText*(window: Window, index = 0): string {.property.} =
   var pResult = addr result
 
   proc doGetText(hStatus: HWND) =
-    block:
-      var count, length: int
-      if SendMessageTimeout(hStatus, SB_GETPARTS, 0, 0, SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&count)) == 0: break
-      if SendMessageTimeout(hStatus, SB_GETTEXTLENGTH, WPARAM index, 0, SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&length)) == 0: break
-      length = length and 0xffff
-      if length == 0: break
+    var count, length: int
+    if SendMessageTimeout(hStatus, SB_GETPARTS, 0, 0,
+      SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&count)) == 0: return
 
-      let bufferSize = length * sizeof(TChar) + 8
-      var rp = remoteAlloc(HWND window, bufferSize)
-      if not rp.ok: break
-      defer: rp.remoteDealloc()
+    if SendMessageTimeout(hStatus, SB_GETTEXTLENGTH, WPARAM index, 0,
+      SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&length)) == 0: return
 
-      if SendMessageTimeout(hStatus, SB_GETTEXT, WPARAM index, cast[LPARAM](rp.address), SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&length)) == 0: break
-      length = length and 0xffff
-      if length == 0: break
+    length = length and 0xffff
+    if length == 0: return
 
-      var buffer = rp.remoteRead()
-      pResult[] = nullTerminated($cast[TString](buffer))
+    let bufferSize = length * sizeof(TChar) + 8
+    var rp = remoteAlloc(HWND window, bufferSize)
+    if not rp.ok: return
+    defer: rp.remoteDealloc()
+
+    if SendMessageTimeout(hStatus, SB_GETTEXT, WPARAM index, cast[LPARAM](rp.address),
+      SMTO_ABORTIFHUNG, 100, cast[PDWORD_PTR](&length)) == 0: return
+
+    length = length and 0xffff
+    if length == 0: return
+
+    var buffer = rp.remoteRead()
+    pResult[] = nullTerminated($cast[TString](buffer))
 
   if window.getClassName == "msctls_statusbar32":
     doGetText(HWND window)
@@ -496,9 +501,30 @@ iterator allWindows*(parent: Window): Window =
 
   for window in list: yield window
 
+proc walkMenu(list: var seq[MenuItem], hMenu: HMENU) =
+  var menuInfo = MENUINFO(cbSize: cint sizeof(MENUINFO), fMask: MIM_STYLE)
+  GetMenuInfo(hMenu, &menuInfo)
+  var byPos = (menuInfo.dwStyle and MNS_NOTIFYBYPOS) != 0
+
+  for i in 0..<GetMenuItemCount(hMenu):
+    var buffer = T(65536)
+    GetMenuString(hMenu, i, &buffer, cint buffer.len, MF_BYPOSITION)
+    buffer.nullTerminate
+
+    var item = MenuItem(
+      handle: hMenu,
+      index: i,
+      id: GetMenuItemID(hMenu, i),
+      text: $buffer,
+      byPos: byPos)
+
+    list.add item
+
+    if item.id == -1:
+      walkMenu(list, GetSubMenu(hMenu, i))
+
 iterator menuItems*(window: Window): MenuItem =
   ## Iterates over all the menu items in the specified window.
-
   runnableExamples:
     import strutils
 
@@ -511,30 +537,7 @@ iterator menuItems*(window: Window): MenuItem =
           break
 
   var list = newSeq[MenuItem]()
-
-  proc walkMenu(hMenu: HMENU) =
-    var menuInfo = MENUINFO(cbSize: cint sizeof(MENUINFO), fMask: MIM_STYLE)
-    GetMenuInfo(hMenu, &menuInfo)
-    var byPos = (menuInfo.dwStyle and MNS_NOTIFYBYPOS) != 0
-
-    for i in 0..<GetMenuItemCount(hMenu):
-      var buffer = T(65536)
-      GetMenuString(hMenu, i, &buffer, cint buffer.len, MF_BYPOSITION)
-      buffer.nullTerminate
-
-      var item = MenuItem(
-        handle: hMenu,
-        index: i,
-        id: GetMenuItemID(hMenu, i),
-        text: $buffer,
-        byPos: byPos)
-
-      list.add item
-
-      if item.id == -1:
-        walkMenu(GetSubMenu(hMenu, i))
-
-  walkMenu(GetMenu(HWND window))
+  walkMenu(list, GetMenu(HWND window))
   for item in list: yield item
 
 template enumerate*(body: untyped): untyped =

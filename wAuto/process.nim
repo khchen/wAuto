@@ -1,13 +1,11 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
 ## This module contains support to manipulate process.
-
-{.deadCodeElim: on.}
 
 import strutils, tables
 import winim/lean, winim/inc/[tlhelp32, psapi, shellapi]
@@ -462,13 +460,13 @@ proc stdoutRead*(process: Process, peek = false): string =
   ## Reads from the STDOUT stream of a previously run child process.
   if process in gPipe:
     let pipes = gPipe[process]
-    result = stdread(pipes.stdoutRead)
+    result = stdread(pipes.stdoutRead, peek)
 
 proc stderrRead*(process: Process, peek = false): string =
   ## Reads from the STDERR stream of a previously run child process.
   if process in gPipe:
     let pipes = gPipe[process]
-    result = stdread(pipes.stderrRead)
+    result = stdread(pipes.stderrRead, peek)
 
 proc run(path: string, username = "", password = "", domain = "",
     workingDir = "", options: set[ProcessOption] = {}): Process =

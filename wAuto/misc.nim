@@ -1,16 +1,15 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
 
 ## This module contains misc. functions for wAuto.
 
-{.deadCodeElim: on.}
-
-import os
+import os, strutils
 import winim/lean, winim/inc/shellapi
+import wNim/[wDataObject, wUtils]
 
 proc isAdmin*(): bool =
   ## Checks if the current user has full administrator privileges.
@@ -66,3 +65,22 @@ proc requireAdmin*(raiseError = true) =
 
     else:
       quit()
+
+proc clipGet*(allowFiles = false): string =
+  ## Retrieves text from the clipboard.
+  ## When *allowFiles* is true and multiple selecting file/dir are stored in the
+  ## clipboard, the filename/dirname are returned as texts separated by @LF.
+  let data = wGetClipboard()
+  if data.isText():
+    result = data.getText()
+
+  elif data.isFiles() and allowFiles:
+    result = data.getFiles.join("\n")
+
+proc clipPut*(text: string) =
+  ## Writes text to the clipboard. An empty string "" will empty the clipboard.
+  if text == "":
+    wClearClipboard()
+  else:
+    wSetClipboard(DataObject(text))
+    wFlushClipboard()

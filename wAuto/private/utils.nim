@@ -1,11 +1,9 @@
 #====================================================================
 #
 #               wAuto - Windows Automation Module
-#                 (c) Copyright 2020-2022 Ward
+#               Copyright (c) Chen Kai-Hung, Ward
 #
 #====================================================================
-
-{.deadCodeElim: on.}
 
 import winim/lean
 
@@ -32,18 +30,17 @@ proc setPrivilege*(privilege = "SeDebugPrivilege") =
       AdjustTokenPrivileges(token, false, addr tp, cint sizeof(TOKEN_PRIVILEGES), nil, nil)
 
 proc remoteAlloc*(hwnd: HWND, size: Natural): RemotePointer =
-  block:
-    var pid: DWORD
-    GetWindowThreadProcessId(hwnd, &pid)
-    if pid == 0: break
+  var pid: DWORD
+  GetWindowThreadProcessId(hwnd, &pid)
+  if pid == 0: return
 
-    result.handle = OpenProcess(PROCESS_VM_OPERATION or PROCESS_VM_READ or PROCESS_VM_WRITE, FALSE, pid)
-    if result.handle == 0: break
+  result.handle = OpenProcess(PROCESS_VM_OPERATION or PROCESS_VM_READ or PROCESS_VM_WRITE, FALSE, pid)
+  if result.handle == 0: return
 
-    result.address = VirtualAllocEx(result.handle, nil, SIZE_T size, MEM_RESERVE or MEM_COMMIT, PAGE_READWRITE)
-    if result.address.isNil: break
+  result.address = VirtualAllocEx(result.handle, nil, SIZE_T size, MEM_RESERVE or MEM_COMMIT, PAGE_READWRITE)
+  if result.address.isNil: return
 
-    result.size = size
+  result.size = size
 
 proc remoteDealloc*(rp: var RemotePointer) =
   VirtualFreeEx(rp.handle, rp.address, 0, MEM_RELEASE)
